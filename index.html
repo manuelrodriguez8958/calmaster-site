@@ -70,6 +70,16 @@ nav.scrolled{
   box-shadow:0 4px 15px rgba(255,107,53,0.3);
 }
 .nav-cta:hover{background:#ff8355;transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,107,53,0.4);}
+.nav-lang{
+  display:flex;align-items:center;gap:6px;
+  font-size:13.5px;color:var(--muted);
+  font-weight:400;
+}
+.nav-lang a{color:var(--muted);transition:color 0.2s;}
+.nav-lang a:hover{color:var(--text);}
+.nav-lang .active{color:var(--text);font-weight:600;}
+.nav-lang .sep{color:var(--dim);}
+.nav-right{display:flex;align-items:center;gap:20px;}
 
 /* ─── HERO ─── */
 .hero{
@@ -511,7 +521,14 @@ footer{
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a href="#pricing" class="nav-cta">Get CalMaster</a>
+  <div class="nav-right">
+    <div class="nav-lang">
+      <a href="/zh">中文</a>
+      <span class="sep">/</span>
+      <span class="active">EN</span>
+    </div>
+    <a href="#pricing" class="nav-cta">Get CalMaster</a>
+  </div>
 </nav>
 
 <!-- HERO -->
