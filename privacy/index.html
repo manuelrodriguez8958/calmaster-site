@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="description" content="CalMaster Privacy Policy — what we collect, how we use it, and your rights.">
+<title>Privacy Policy — CalMaster</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: #222;
+    -webkit-text-size-adjust: 100%;
+  }
+  .nav {
+    border-bottom: 1px solid #e5e5e5;
+    background: #fff;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .nav-inner {
+    max-width: 680px; margin: 0 auto;
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-size: 17px; font-weight: 700; color: #000; text-decoration: none; letter-spacing: -0.2px; }
+  .home-link { font-size: 14px; color: #7C3AED; text-decoration: none; }
+  .home-link:hover { text-decoration: underline; }
+  main { max-width: 680px; margin: 0 auto; padding: 24px 20px 64px; }
+  h1 { font-size: 26px; font-weight: 700; color: #000; margin: 8px 0 4px; letter-spacing: -0.3px; }
+  h1.zh { font-size: 21px; margin-top: 8px; }
+  h2 { font-size: 17px; font-weight: 700; color: #000; margin: 28px 0 8px; }
+  .updated { font-size: 13px; color: #666; margin: 0 0 20px; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+  strong { color: #000; font-weight: 600; }
+  a { color: #7C3AED; }
+  hr { border: 0; border-top: 1px solid #e5e5e5; margin: 32px 0; }
+  footer { max-width: 680px; margin: 0 auto; padding: 16px 20px 40px; color: #888; font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/">CalMaster</a>
+    <a class="home-link" href="/">← Home</a>
+  </div>
+</nav>
+
+<main>
+  <h1>CalMaster Privacy Policy</h1>
+  <p class="updated">Last updated: April 24, 2026</p>
+
+  <p>This Privacy Policy explains what information we collect when you use CalMaster, how we use it, and the choices you have. By using the app you agree to the practices described here.</p>
+
+  <h2>1. Information we collect</h2>
+  <p><strong>Account information.</strong> When you sign up we collect your email address and display name. Authentication is handled by Supabase Auth.</p>
+  <p><strong>Profile information.</strong> To compute your daily calorie goal we collect height, weight, age, gender, and activity preferences. You provide these during onboarding.</p>
+  <p><strong>Usage data.</strong> Food logs (name, calories, macronutrients, timestamp), exercise logs (type, duration, calories), and your preferred language and notification settings.</p>
+  <p><strong>AI analysis content.</strong> When you use AI food photo analysis or AI exercise video analysis, the photo or video is sent to our backend and to Anthropic's Claude API for inference. These are processed transiently to return a result and are not retained long-term by us beyond the analysis result (calories, detected exercise, etc.).</p>
+  <p><strong>Apple HealthKit data (iOS, optional).</strong> If you grant permission, we read step count and active energy from HealthKit to display daily activity. HealthKit data stays on your device and is only read when the app is open. We do not transmit raw HealthKit data to our servers; only aggregated numbers are used to display your dashboard.</p>
+  <p><strong>Subscription status.</strong> RevenueCat manages subscription entitlement and provides us with the active/expired status. We do not receive credit card or payment details.</p>
+  <p><strong>Device and technical data.</strong> Basic device information (OS, app version, language) via Expo to diagnose crashes and compatibility issues.</p>
+
+  <h2>2. How we use information</h2>
+  <ul>
+    <li>To provide the core app functionality (logging, summaries, trends).</li>
+    <li>To run AI analyses you explicitly request (photo/video).</li>
+    <li>To send local notifications you enable (meal reminders, evening recap).</li>
+    <li>To manage your subscription and restore purchases.</li>
+    <li>To diagnose errors and improve stability.</li>
+  </ul>
+  <p>We do <strong>not</strong> sell your personal information, do <strong>not</strong> use it for advertising, and do <strong>not</strong> share it with third parties for their own marketing.</p>
+
+  <h2>3. Third-party services</h2>
+  <p>We rely on the following processors. Each receives only the minimum data needed for its role:</p>
+  <ul>
+    <li><strong>Supabase</strong> — authentication, database, and edge functions. Stores your account, profile, logs, and notification preferences.</li>
+    <li><strong>Anthropic (Claude API)</strong> — runs AI inference on the food photos, exercise videos, and text summaries you request. See <a href="https://www.anthropic.com/legal/privacy">Anthropic's privacy policy</a>.</li>
+    <li><strong>RevenueCat</strong> — subscription management and entitlement. Receives a RevenueCat-scoped user identifier and subscription status from Apple. See <a href="https://www.revenuecat.com/privacy/">RevenueCat's privacy policy</a>.</li>
+    <li><strong>Apple (App Store &amp; HealthKit)</strong> — payments, subscriptions, and (optionally) health data read with your permission.</li>
+  </ul>
+
+  <h2>4. Data retention</h2>
+  <p>We keep your account and logs for as long as your account is active. If you delete your account, we remove your profile, food/exercise logs, and linked identifiers from our database within 30 days. Backups are purged on our regular rotation (up to 90 days). Apple may retain purchase records independently.</p>
+
+  <h2>5. Your rights</h2>
+  <ul>
+    <li><strong>Access</strong> — request a copy of your data by emailing <a href="mailto:support@calmaster.app">support@calmaster.app</a>.</li>
+    <li><strong>Correction</strong> — edit your profile and logs directly in the app.</li>
+    <li><strong>Deletion</strong> — delete your account from Profile → Delete account, or email us.</li>
+    <li><strong>Withdraw HealthKit consent</strong> — revoke access anytime in iOS Settings → Privacy &amp; Security → Health → CalMaster.</li>
+  </ul>
+
+  <h2>6. HealthKit-specific disclosures</h2>
+  <p>Data received through Apple HealthKit:</p>
+  <ul>
+    <li>is <strong>never</strong> sold or shared with advertisers;</li>
+    <li>is <strong>never</strong> used for marketing;</li>
+    <li>is <strong>not</strong> transmitted to our servers — it is read locally on your device for display;</li>
+    <li>is only accessed with your explicit permission granted through the iOS HealthKit prompt.</li>
+  </ul>
+
+  <h2>7. Children</h2>
+  <p>CalMaster is not directed to children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided information to us, please contact <a href="mailto:support@calmaster.app">support@calmaster.app</a> and we will delete it.</p>
+
+  <h2>8. Security</h2>
+  <p>We use industry-standard practices to protect your data in transit (HTTPS/TLS) and at rest. No system is perfectly secure; if we become aware of a breach affecting your information we will notify you as required by applicable law.</p>
+
+  <h2>9. International transfers</h2>
+  <p>Our processors (Supabase, Anthropic, RevenueCat) may store and process data in the United States and other countries. By using the Service you consent to such transfers where permitted by applicable law.</p>
+
+  <h2>10. Changes to this policy</h2>
+  <p>We may update this policy as the Service evolves. Material changes will be notified through the app or by email before taking effect.</p>
+
+  <h2>11. Contact</h2>
+  <p>For privacy questions or data requests email <a href="mailto:support@calmaster.app">support@calmaster.app</a>.</p>
+
+  <hr>
+
+  <h1 class="zh">CalMaster 隐私政策（中文摘要）</h1>
+  <p>本摘要仅供参考，正式政策以上文英文版为准。</p>
+  <ul>
+    <li>我们收集的信息：邮箱与昵称、身高体重年龄性别等资料、饮食/运动记录、设备信息；你授权后读取 HealthKit 的步数与消耗卡路里。</li>
+    <li>AI 图片/视频分析：你提交的内容会发送到我们后端与 Anthropic Claude API 进行分析，处理完即丢弃。</li>
+    <li>第三方服务：Supabase（存储与认证）、Anthropic（AI 推理）、RevenueCat（订阅管理）、Apple（支付与 HealthKit）。我们不出售你的数据，不做广告追踪。</li>
+    <li>HealthKit 数据仅在设备本地读取，不传输到我们的服务器，不会用于广告或营销。</li>
+    <li>数据删除：App 内「Profile → Delete account」可永久删除账户，或发邮件至 <a href="mailto:support@calmaster.app">support@calmaster.app</a>。</li>
+    <li>13 岁以下儿童不得使用本服务。</li>
+    <li>有隐私问题请邮件至 <a href="mailto:support@calmaster.app">support@calmaster.app</a>。</li>
+  </ul>
+</main>
+
+<footer>© CalMaster. All rights reserved.</footer>
+
+</body>
+</html>
