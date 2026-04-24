@@ -58,8 +58,29 @@
     border: 1px solid #d5d5d5;
   }
   .btn-secondary:hover { background: #f5f5f5; }
-  .placeholder-note {
-    font-size: 12px; color: #888; text-align: center; margin-top: 10px;
+  .screenshots {
+    margin-top: 32px;
+    display: flex; gap: 16px;
+    overflow-x: auto;
+    padding: 4px 2px 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .screenshots::-webkit-scrollbar { height: 6px; }
+  .screenshots::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 3px; }
+  .shot {
+    flex: 0 0 auto;
+    width: 200px;
+    aspect-ratio: 375 / 812;
+    background: #ececec;
+    border: 1px solid #e0e0e0;
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    color: #999; font-size: 13px; font-weight: 500;
+    scroll-snap-align: start;
+  }
+  @media (min-width: 640px) {
+    .screenshots { justify-content: center; overflow-x: visible; }
   }
   h2 { font-size: 20px; font-weight: 700; color: #000; margin: 40px 0 12px; letter-spacing: -0.2px; }
   .features { display: grid; gap: 14px; margin-top: 8px; }
@@ -119,11 +140,17 @@
     <h1 data-i18n="hero.title">Track calories the smart way</h1>
     <p data-i18n="hero.subtitle">CalMaster uses AI to analyze your meal photos and exercise videos. Log faster, understand trends, and hit your goals.</p>
     <div class="cta-row">
-      <a class="btn-primary" href="#" data-i18n="hero.cta">Download on the App Store</a>
+      <a class="btn-primary" href="https://apps.apple.com/app/id6762075549" data-i18n="hero.cta">Download on the App Store</a>
       <a class="btn-secondary" href="/privacy" data-i18n="hero.secondary">Privacy Policy</a>
     </div>
-    <p class="placeholder-note" data-i18n="hero.note">App Store link coming soon.</p>
   </section>
+
+  <div class="screenshots" aria-label="App screenshots">
+    <div class="shot">Screenshot</div>
+    <div class="shot">Screenshot</div>
+    <div class="shot">Screenshot</div>
+    <div class="shot">Screenshot</div>
+  </div>
 
   <h2 data-i18n="features.title">What you get</h2>
   <div class="features">
@@ -199,7 +226,6 @@
       "hero.subtitle": "CalMaster uses AI to analyze your meal photos and exercise videos. Log faster, understand trends, and hit your goals.",
       "hero.cta": "Download on the App Store",
       "hero.secondary": "Privacy Policy",
-      "hero.note": "App Store link coming soon.",
       "features.title": "What you get",
       "features.f1.title": "AI food photo analysis",
       "features.f1.desc": "Snap your meal and get calorie and macro estimates in seconds.",
@@ -236,7 +262,6 @@
       "hero.subtitle": "CalMaster 用 AI 帮你记录每一餐、分析每一次运动，让健康管理前所未有的简单。",
       "hero.cta": "App Store 下载",
       "hero.secondary": "隐私政策",
-      "hero.note": "即将上线，敬请期待。",
       "features.title": "核心功能",
       "features.f1.title": "AI 食物照片分析",
       "features.f1.desc": "拍一张照片，自动识别卡路里和营养素，无需手动查询。",
