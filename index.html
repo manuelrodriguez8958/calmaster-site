@@ -5,116 +5,326 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index,follow">
 <meta name="description" content="CalMaster — AI-powered calorie and fitness tracking. Log meals by photo, analyze exercise by video, and hit your goals.">
+<meta name="theme-color" content="#0a0a0a">
 <title>CalMaster — AI calorie &amp; fitness tracker</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: #fff; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #ff6b1a;
+    --accent-2: #ff8a3d;
+    --accent-soft: rgba(255, 107, 26, 0.15);
+    --accent-border: rgba(255, 107, 26, 0.38);
+    --text: #ffffff;
+    --text-dim: rgba(255, 255, 255, 0.72);
+    --text-mute: rgba(255, 255, 255, 0.5);
+    --text-faint: rgba(255, 255, 255, 0.38);
+    --surface: rgba(255, 255, 255, 0.04);
+    --surface-2: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-2: rgba(255, 255, 255, 0.14);
+  }
+  html { scroll-behavior: smooth; }
+  html, body {
+    background: #0a0a0a;
+    color: var(--text);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     font-size: 16px;
     line-height: 1.55;
-    color: #222;
-    -webkit-text-size-adjust: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    background:
+      linear-gradient(145deg, #0a0a0a 0%, #1a0e00 40%, #2d1500 65%, #0a0a0a 100%);
+    background-attachment: fixed;
   }
+  body::before, body::after {
+    content: ""; position: fixed; pointer-events: none; z-index: 0;
+    width: 720px; height: 720px; border-radius: 50%;
+    filter: blur(40px);
+  }
+  body::before {
+    top: -240px; right: -200px;
+    background: radial-gradient(circle, rgba(255,100,0,0.18) 0%, transparent 70%);
+  }
+  body::after {
+    bottom: -260px; left: -200px;
+    background: radial-gradient(circle, rgba(255,60,0,0.12) 0%, transparent 70%);
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  /* ─── NAV ─── */
   .nav {
-    border-bottom: 1px solid #e5e5e5;
-    background: #fff;
-    position: sticky; top: 0; z-index: 10;
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    background: rgba(10, 10, 10, 0.55);
+    border-bottom: 1px solid var(--border);
   }
   .nav-inner {
-    max-width: 680px; margin: 0 auto;
-    padding: 14px 20px;
+    max-width: 1100px; margin: 0 auto;
+    padding: 16px 24px;
     display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
   }
-  .logo { font-size: 17px; font-weight: 700; color: #000; text-decoration: none; letter-spacing: -0.2px; }
+  .logo {
+    font-size: 19px; font-weight: 800; letter-spacing: -0.3px;
+    background: linear-gradient(135deg, #ffffff 0%, var(--accent-2) 60%, var(--accent) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
   .nav-right { display: flex; align-items: center; gap: 18px; }
-  .nav-links { display: flex; gap: 16px; }
-  .nav-links a { font-size: 14px; color: #7C3AED; text-decoration: none; }
-  .nav-links a:hover { text-decoration: underline; }
-  .lang-switch { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #888; }
+  .nav-links { display: flex; gap: 18px; }
+  .nav-links a {
+    font-size: 13.5px; color: var(--text-dim);
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .lang-switch {
+    display: inline-flex; align-items: center;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    padding: 4px;
+    gap: 2px;
+  }
   .lang-switch button {
-    background: none; border: none; padding: 0;
-    font: inherit; color: #888; cursor: pointer;
+    background: none; border: 0;
+    font: inherit; font-size: 12.5px; font-weight: 600;
+    color: var(--text-dim);
+    padding: 5px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
   }
-  .lang-switch button:hover { color: #000; }
-  .lang-switch button.active { color: #000; font-weight: 600; text-decoration: underline; }
-  .lang-switch .sep { color: #ccc; }
-  main { max-width: 680px; margin: 0 auto; padding: 40px 20px 48px; }
-  .hero { text-align: center; padding: 16px 0 32px; }
-  .hero h1 { font-size: 32px; font-weight: 800; color: #000; margin: 0 0 12px; letter-spacing: -0.5px; line-height: 1.2; }
-  .hero p { font-size: 17px; color: #555; margin: 0 auto; max-width: 520px; }
-  .cta-row { display: flex; justify-content: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .lang-switch button:hover { color: var(--text); }
+  .lang-switch button.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(255,107,26,0.35);
+  }
+
+  /* ─── LAYOUT ─── */
+  main { position: relative; z-index: 1; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 80px 0; }
+
+  /* ─── HERO ─── */
+  .hero { text-align: center; padding: 88px 0 48px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em;
+    color: var(--accent-2);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    padding: 7px 14px; border-radius: 999px;
+    margin-bottom: 24px;
+  }
+  .badge::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    animation: pulse 2s infinite ease-in-out;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  h1.hero-title {
+    font-size: clamp(36px, 6vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 780px; margin: 0 auto 20px;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.78) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .hero-sub {
+    font-size: 17px; color: var(--text-mute);
+    max-width: 560px; margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+  .cta-row {
+    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+  }
   .btn-primary {
-    display: inline-block; padding: 14px 24px;
-    background: #000; color: #fff; font-size: 15px; font-weight: 600;
-    text-decoration: none; border-radius: 10px;
-    transition: opacity 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 26px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: #fff; font-size: 15px; font-weight: 700;
+    border-radius: 12px;
+    box-shadow: 0 8px 28px rgba(255,107,26,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: transform 0.18s, box-shadow 0.18s;
   }
-  .btn-primary:hover { opacity: 0.85; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,107,26,0.45); }
   .btn-secondary {
-    display: inline-block; padding: 14px 24px;
-    background: #fff; color: #000; font-size: 15px; font-weight: 600;
-    text-decoration: none; border-radius: 10px;
-    border: 1px solid #d5d5d5;
+    display: inline-flex; align-items: center;
+    padding: 14px 24px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 15px; font-weight: 600;
+    border: 1px solid var(--border-2);
+    border-radius: 12px;
+    transition: background 0.18s, border-color 0.18s;
   }
-  .btn-secondary:hover { background: #f5f5f5; }
-  .screenshots-bg {
-    background: #f5f5f5;
-    padding: 40px 0;
-    margin: 32px calc(50% - 50vw) 8px;
-  }
+  .btn-secondary:hover { background: var(--surface-2); border-color: rgba(255,255,255,0.22); }
+
+  /* ─── SCREENSHOTS ─── */
+  .screenshots-section { padding: 24px 0 48px; }
   .screenshots {
-    max-width: 680px;
-    margin: 0 auto;
-    display: flex; gap: 20px;
+    display: flex; gap: 16px;
     overflow-x: auto;
-    padding: 4px 20px 12px;
+    padding: 8px 24px 24px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.15) transparent;
   }
   .screenshots::-webkit-scrollbar { height: 6px; }
-  .screenshots::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 3px; }
+  .screenshots::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
   .shot {
     flex: 0 0 auto;
-    width: 200px;
-    height: auto;
-    border-radius: 24px;
+    width: 160px;
+    border-radius: 20px;
     object-fit: contain;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    scroll-snap-align: start;
+    scroll-snap-align: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04);
   }
-  h2 { font-size: 20px; font-weight: 700; color: #000; margin: 40px 0 12px; letter-spacing: -0.2px; }
-  .features { display: grid; gap: 14px; margin-top: 8px; }
+  @media (min-width: 900px) {
+    .screenshots { justify-content: center; }
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-head { text-align: center; margin-bottom: 48px; }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+    color: var(--accent-2); text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 800; letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  /* ─── FEATURES ─── */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 620px) { .features { grid-template-columns: 1fr; } }
   .feature {
-    padding: 16px;
-    background: #fafafa;
-    border: 1px solid #eee;
-    border-radius: 12px;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
   }
-  .feature strong { display: block; font-size: 15px; color: #000; margin-bottom: 4px; }
-  .feature span { font-size: 14px; color: #555; }
-  .plans { display: grid; gap: 10px; margin-top: 8px; }
+  .feature:hover {
+    background: var(--surface-2);
+    border-color: var(--border-2);
+    transform: translateY(-2px);
+  }
+  .feature-icon {
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+  .feature strong {
+    display: block; font-size: 16px; color: var(--text);
+    font-weight: 700; margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .feature span { font-size: 14px; color: var(--text-mute); line-height: 1.55; }
+
+  /* ─── PRICING ─── */
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 820px) { .plans { grid-template-columns: 1fr; } }
   .plan {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 14px 16px;
-    background: #fafafa;
-    border: 1px solid #eee;
-    border-radius: 12px;
+    position: relative;
+    padding: 28px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    display: flex; flex-direction: column; gap: 6px;
   }
-  .plan-name { font-weight: 600; color: #000; }
-  .plan-price { color: #7C3AED; font-weight: 600; }
-  .plan-sub { display: block; font-size: 12px; color: #777; font-weight: 400; margin-top: 2px; }
-  .trial-note { font-size: 13px; color: #777; text-align: center; margin-top: 14px; }
+  .plan.featured {
+    background: linear-gradient(180deg, rgba(255,107,26,0.10) 0%, rgba(255,107,26,0.02) 100%);
+    border-color: var(--accent-border);
+    box-shadow: 0 12px 40px rgba(255,107,26,0.15);
+  }
+  .plan-tag {
+    position: absolute; top: -11px; left: 24px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em;
+    color: #fff; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    padding: 5px 10px; border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(255,107,26,0.4);
+  }
+  .plan-name {
+    font-size: 13px; font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .plan-price {
+    font-size: 30px; font-weight: 800; color: var(--text);
+    letter-spacing: -0.02em;
+    margin-top: 4px;
+  }
+  .plan-price .per { font-size: 14px; font-weight: 500; color: var(--text-mute); }
+  .plan-sub { font-size: 13px; color: var(--text-mute); margin-top: 4px; }
+  .trial-note {
+    text-align: center; margin-top: 28px;
+    font-size: 13.5px; color: var(--text-mute);
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-card {
+    max-width: 560px; margin: 0 auto;
+    text-align: center;
+    padding: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+  .contact-card p { color: var(--text-mute); font-size: 15px; }
+  .contact-card a { color: var(--accent-2); font-weight: 600; }
+  .contact-card a:hover { text-decoration: underline; }
+
+  /* ─── FOOTER ─── */
   footer {
-    max-width: 680px; margin: 0 auto;
-    padding: 24px 20px 40px;
-    border-top: 1px solid #e5e5e5;
-    color: #888; font-size: 13px;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 24px 24px 40px;
+    color: var(--text-faint); font-size: 13px;
   }
-  footer a { color: #7C3AED; text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
-  footer .copyright { color: #888; }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px;
+  }
+  footer a { color: var(--text-dim); }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 560px) {
+    .nav-links { display: none; }
+    .section { padding: 60px 0; }
+    .hero { padding: 64px 0 36px; }
+  }
 </style>
 </head>
 <body>
@@ -128,93 +338,120 @@
         <a href="/privacy" data-i18n="nav.privacy">Privacy</a>
       </div>
       <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" data-lang="zh">中文</button>
-        <span class="sep">/</span>
         <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="zh">中文</button>
       </div>
     </div>
   </div>
 </nav>
 
 <main>
-  <section class="hero">
-    <h1 data-i18n="hero.title">Track calories the smart way</h1>
-    <p data-i18n="hero.subtitle">CalMaster uses AI to analyze your meal photos and exercise videos. Log faster, understand trends, and hit your goals.</p>
+  <section class="hero wrap">
+    <div class="badge" data-i18n="hero.badge">NOW ON APP STORE</div>
+    <h1 class="hero-title" data-i18n="hero.title">Track calories the smart way</h1>
+    <p class="hero-sub" data-i18n="hero.subtitle">CalMaster uses AI to analyze your meal photos and exercise videos. Log faster, understand trends, and hit your goals.</p>
     <div class="cta-row">
-      <a class="btn-primary" href="https://apps.apple.com/app/id6762075549" data-i18n="hero.cta">Download on the App Store</a>
+      <a class="btn-primary" href="https://apps.apple.com/app/id6762075549">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.564 13.06c-.021-2.316 1.887-3.422 1.973-3.478-1.072-1.57-2.74-1.785-3.335-1.81-1.421-.144-2.77.838-3.492.838-.72 0-1.833-.815-3.013-.793-1.55.023-2.978.898-3.776 2.283-1.606 2.783-.411 6.9 1.156 9.166.766 1.11 1.68 2.361 2.874 2.317 1.152-.047 1.588-.744 2.978-.744 1.39 0 1.783.744 3.002.718 1.236-.021 2.02-1.132 2.776-2.247.873-1.293 1.234-2.548 1.255-2.613-.028-.012-2.403-.923-2.428-3.637zM15.25 6.23c.639-.776 1.07-1.854.95-2.926-.919.038-2.033.613-2.694 1.389-.593.685-1.113 1.787-.974 2.841 1.027.08 2.078-.523 2.718-1.304z"/></svg>
+        <span data-i18n="hero.cta">Download on App Store</span>
+      </a>
       <a class="btn-secondary" href="/privacy" data-i18n="hero.secondary">Privacy Policy</a>
     </div>
   </section>
 
-  <div class="screenshots-bg">
+  <section class="screenshots-section">
     <div class="screenshots" aria-label="App screenshots">
-      <img class="shot" src="screenshots/ss1.png" alt="CalMaster screenshot 1">
-      <img class="shot" src="screenshots/ss2.png" alt="CalMaster screenshot 2">
-      <img class="shot" src="screenshots/ss3.png" alt="CalMaster screenshot 3">
-      <img class="shot" src="screenshots/ss4.png" alt="CalMaster screenshot 4">
-      <img class="shot" src="screenshots/ss5.png" alt="CalMaster screenshot 5">
+      <img class="shot" src="screenshots/ss1.png" alt="">
+      <img class="shot" src="screenshots/ss2.png" alt="">
+      <img class="shot" src="screenshots/ss3.png" alt="">
+      <img class="shot" src="screenshots/ss4.png" alt="">
+      <img class="shot" src="screenshots/ss5.png" alt="">
     </div>
-  </div>
+  </section>
 
-  <h2 data-i18n="features.title">What you get</h2>
-  <div class="features">
-    <div class="feature">
-      <strong data-i18n="features.f1.title">AI food photo analysis</strong>
-      <span data-i18n="features.f1.desc">Snap your meal and get calorie and macro estimates in seconds.</span>
+  <section class="section wrap" id="features">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="features.eyebrow">Features</div>
+      <h2 class="section-title" data-i18n="features.title">Everything you need to hit your goals</h2>
     </div>
-    <div class="feature">
-      <strong data-i18n="features.f2.title">AI exercise video analysis</strong>
-      <span data-i18n="features.f2.desc">Record pushups, squats, situps and more — automatic rep counting and calorie burn.</span>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">📸</div>
+        <strong data-i18n="features.f1.title">AI food analysis</strong>
+        <span data-i18n="features.f1.desc">Snap a photo and get instant calorie and macro estimates in seconds.</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎥</div>
+        <strong data-i18n="features.f2.title">Exercise tracking</strong>
+        <span data-i18n="features.f2.desc">Record your workout — auto rep counting and calorie burn via video AI.</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📈</div>
+        <strong data-i18n="features.f3.title">Daily trends</strong>
+        <span data-i18n="features.f3.desc">See daily and 30-day trends with clear charts that keep you on pace.</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🏆</div>
+        <strong data-i18n="features.f4.title">Challenge friends</strong>
+        <span data-i18n="features.f4.desc">Compete with friends on goals and streaks to stay motivated every day.</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🏷️</div>
+        <strong data-i18n="features.f5.title">Barcode scan</strong>
+        <span data-i18n="features.f5.desc">Scan packaged food barcodes for accurate nutrition in one tap.</span>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🌍</div>
+        <strong data-i18n="features.f6.title">8 languages</strong>
+        <span data-i18n="features.f6.desc">English, 简体中文, 繁體中文, 日本語, Español, Français, Deutsch, Русский.</span>
+      </div>
     </div>
-    <div class="feature">
-      <strong data-i18n="features.f3.title">Daily &amp; 30-day trends</strong>
-      <span data-i18n="features.f3.desc">Stay on top of your calorie balance with clear weekly and monthly charts.</span>
-    </div>
-    <div class="feature">
-      <strong data-i18n="features.f5.title">Challenge friends</strong>
-      <span data-i18n="features.f5.desc">Compete with friends on goals and streaks to stay motivated.</span>
-    </div>
-    <div class="feature">
-      <strong data-i18n="features.f6.title">Eight languages</strong>
-      <span data-i18n="features.f6.desc">English, 简体中文, 繁體中文, 日本語, Español, Français, Deutsch, Русский.</span>
-    </div>
-  </div>
+  </section>
 
-  <h2 data-i18n="pricing.title">Pricing</h2>
-  <div class="plans">
-    <div class="plan">
-      <div>
+  <section class="section wrap" id="pricing">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="pricing.eyebrow">Pricing</div>
+      <h2 class="section-title" data-i18n="pricing.title">Simple plans for every goal</h2>
+    </div>
+    <div class="plans">
+      <div class="plan">
         <div class="plan-name" data-i18n="pricing.monthly.name">Monthly</div>
-        <span class="plan-sub" data-i18n="pricing.monthly.sub">Flexible month-to-month</span>
+        <div class="plan-price" data-i18n="pricing.monthly.price" data-i18n-html>AUD 12.99<span class="per"> / month</span></div>
+        <div class="plan-sub" data-i18n="pricing.monthly.sub">Flexible month-to-month</div>
       </div>
-      <div class="plan-price" data-i18n="pricing.monthly.price">A$12.99 / month</div>
-    </div>
-    <div class="plan">
-      <div>
+      <div class="plan featured">
+        <div class="plan-tag" data-i18n="pricing.yearly.tag">Save 65%</div>
         <div class="plan-name" data-i18n="pricing.yearly.name">Yearly</div>
-        <span class="plan-sub" data-i18n="pricing.yearly.sub">Save 65% vs monthly</span>
+        <div class="plan-price" data-i18n="pricing.yearly.price" data-i18n-html>AUD 36.99<span class="per"> / year</span></div>
+        <div class="plan-sub" data-i18n="pricing.yearly.sub">Best value — auto-renews yearly</div>
       </div>
-      <div class="plan-price" data-i18n="pricing.yearly.price">A$44.99 / year</div>
-    </div>
-    <div class="plan">
-      <div>
+      <div class="plan">
         <div class="plan-name" data-i18n="pricing.lifetime.name">Lifetime</div>
-        <span class="plan-sub" data-i18n="pricing.lifetime.sub">One-time purchase, no recurring charge</span>
+        <div class="plan-price" data-i18n="pricing.lifetime.price" data-i18n-html>AUD 69.99<span class="per"> / once</span></div>
+        <div class="plan-sub" data-i18n="pricing.lifetime.sub">One-time purchase, no recurring charge</div>
       </div>
-      <div class="plan-price" data-i18n="pricing.lifetime.price">A$69.99</div>
     </div>
-  </div>
-  <p class="trial-note" data-i18n="pricing.trial">All plans include a 4-day free trial. Cancel anytime.</p>
+    <p class="trial-note" data-i18n="pricing.trial">4-day free trial · Cancel anytime</p>
+  </section>
 
-  <h2 data-i18n="contact.title">Contact</h2>
-  <p data-i18n="contact.body" data-i18n-html>Questions, feedback, or support: <a href="mailto:manuelrodriguez8958@gmail.com">manuelrodriguez8958@gmail.com</a></p>
+  <section class="section wrap" id="contact">
+    <div class="section-head">
+      <div class="section-eyebrow" data-i18n="contact.eyebrow">Contact</div>
+      <h2 class="section-title" data-i18n="contact.title">Get in touch</h2>
+    </div>
+    <div class="contact-card">
+      <p data-i18n="contact.body" data-i18n-html>Questions, feedback, or support: <a href="mailto:manuelrodriguez8958@gmail.com">manuelrodriguez8958@gmail.com</a></p>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <span class="copyright" data-i18n="footer.copyright">© CalMaster. All rights reserved.</span>
-  <span data-i18n="footer.links" data-i18n-html>
-    <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a>
-  </span>
+  <div class="footer-inner">
+    <span data-i18n="footer.copyright">© CalMaster. All rights reserved.</span>
+    <span data-i18n="footer.links" data-i18n-html>
+      <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a>
+    </span>
+  </div>
 </footer>
 
 <script>
@@ -222,33 +459,40 @@
     en: {
       "nav.terms": "Terms",
       "nav.privacy": "Privacy",
+      "hero.badge": "NOW ON APP STORE",
       "hero.title": "Track calories the smart way",
       "hero.subtitle": "CalMaster uses AI to analyze your meal photos and exercise videos. Log faster, understand trends, and hit your goals.",
-      "hero.cta": "Download on the App Store",
+      "hero.cta": "Download on App Store",
       "hero.secondary": "Privacy Policy",
-      "features.title": "What you get",
-      "features.f1.title": "AI food photo analysis",
-      "features.f1.desc": "Snap your meal and get calorie and macro estimates in seconds.",
-      "features.f2.title": "AI exercise video analysis",
-      "features.f2.desc": "Record pushups, squats, situps and more — automatic rep counting and calorie burn.",
-      "features.f3.title": "Daily & 30-day trends",
-      "features.f3.desc": "Stay on top of your calorie balance with clear weekly and monthly charts.",
-      "features.f5.title": "Challenge friends",
-      "features.f5.desc": "Compete with friends on goals and streaks to stay motivated.",
-      "features.f6.title": "Eight languages",
+      "features.eyebrow": "Features",
+      "features.title": "Everything you need to hit your goals",
+      "features.f1.title": "AI food analysis",
+      "features.f1.desc": "Snap a photo and get instant calorie and macro estimates in seconds.",
+      "features.f2.title": "Exercise tracking",
+      "features.f2.desc": "Record your workout — auto rep counting and calorie burn via video AI.",
+      "features.f3.title": "Daily trends",
+      "features.f3.desc": "See daily and 30-day trends with clear charts that keep you on pace.",
+      "features.f4.title": "Challenge friends",
+      "features.f4.desc": "Compete with friends on goals and streaks to stay motivated every day.",
+      "features.f5.title": "Barcode scan",
+      "features.f5.desc": "Scan packaged food barcodes for accurate nutrition in one tap.",
+      "features.f6.title": "8 languages",
       "features.f6.desc": "English, 简体中文, 繁體中文, 日本語, Español, Français, Deutsch, Русский.",
-      "pricing.title": "Pricing",
+      "pricing.eyebrow": "Pricing",
+      "pricing.title": "Simple plans for every goal",
       "pricing.monthly.name": "Monthly",
+      "pricing.monthly.price": "AUD 12.99<span class=\"per\"> / month</span>",
       "pricing.monthly.sub": "Flexible month-to-month",
-      "pricing.monthly.price": "A$12.99 / month",
+      "pricing.yearly.tag": "Save 65%",
       "pricing.yearly.name": "Yearly",
-      "pricing.yearly.sub": "Save 65% vs monthly",
-      "pricing.yearly.price": "A$44.99 / year",
+      "pricing.yearly.price": "AUD 36.99<span class=\"per\"> / year</span>",
+      "pricing.yearly.sub": "Best value — auto-renews yearly",
       "pricing.lifetime.name": "Lifetime",
+      "pricing.lifetime.price": "AUD 69.99<span class=\"per\"> / once</span>",
       "pricing.lifetime.sub": "One-time purchase, no recurring charge",
-      "pricing.lifetime.price": "A$69.99",
-      "pricing.trial": "All plans include a 4-day free trial. Cancel anytime.",
-      "contact.title": "Contact",
+      "pricing.trial": "4-day free trial · Cancel anytime",
+      "contact.eyebrow": "Contact",
+      "contact.title": "Get in touch",
       "contact.body": "Questions, feedback, or support: <a href=\"mailto:manuelrodriguez8958@gmail.com\">manuelrodriguez8958@gmail.com</a>",
       "footer.copyright": "© CalMaster. All rights reserved.",
       "footer.links": "<a href=\"/terms\">Terms</a> · <a href=\"/privacy\">Privacy</a>"
@@ -256,33 +500,40 @@
     zh: {
       "nav.terms": "条款",
       "nav.privacy": "隐私政策",
+      "hero.badge": "现已上架 APP STORE",
       "hero.title": "智能卡路里追踪，轻松达成目标",
-      "hero.subtitle": "CalMaster 用 AI 帮你记录每一餐、分析每一次运动，让健康管理前所未有的简单。",
+      "hero.subtitle": "CalMaster 用 AI 分析你的餐食照片与运动视频，记录更快，洞察趋势，稳步达成目标。",
       "hero.cta": "App Store 下载",
       "hero.secondary": "隐私政策",
-      "features.title": "核心功能",
-      "features.f1.title": "AI 食物照片分析",
-      "features.f1.desc": "拍一张照片，自动识别卡路里和营养素，无需手动查询。",
-      "features.f2.title": "AI 运动视频分析",
-      "features.f2.desc": "录制运动视频，AI 自动计算消耗卡路里，告别估算烦恼。",
-      "features.f3.title": "每日 & 30 天趋势",
-      "features.f3.desc": "清晰图表呈现饮食规律，掌握每日的摄入与趋势变化。",
-      "features.f5.title": "挑战好友",
-      "features.f5.desc": "和朋友比拼目标达成，互相激励，坚持更久。",
+      "features.eyebrow": "核心功能",
+      "features.title": "达成目标所需的一切",
+      "features.f1.title": "AI 食物分析",
+      "features.f1.desc": "拍一张照片，几秒内自动估算卡路里与营养素。",
+      "features.f2.title": "运动追踪",
+      "features.f2.desc": "录制运动视频，AI 自动计数并估算消耗卡路里。",
+      "features.f3.title": "每日趋势",
+      "features.f3.desc": "清晰图表呈现每日与 30 天趋势，让你始终掌握节奏。",
+      "features.f4.title": "挑战好友",
+      "features.f4.desc": "和朋友比拼目标与连胜，每天保持动力。",
+      "features.f5.title": "条形码扫描",
+      "features.f5.desc": "扫描包装食品条形码，一键获取精准营养信息。",
       "features.f6.title": "支持 8 种语言",
-      "features.f6.desc": "全球化体验，选择你最熟悉的语言使用。",
-      "pricing.title": "订阅方案",
+      "features.f6.desc": "英文、简体中文、繁體中文、日本語、Español、Français、Deutsch、Русский。",
+      "pricing.eyebrow": "订阅方案",
+      "pricing.title": "简单方案，适配每个目标",
       "pricing.monthly.name": "月订阅",
+      "pricing.monthly.price": "AUD 12.99<span class=\"per\"> / 月</span>",
       "pricing.monthly.sub": "按月灵活订阅",
-      "pricing.monthly.price": "A$12.99 / 月",
+      "pricing.yearly.tag": "省 65%",
       "pricing.yearly.name": "年订阅",
-      "pricing.yearly.sub": "相比月订阅省 65%",
-      "pricing.yearly.price": "A$44.99 / 年",
+      "pricing.yearly.price": "AUD 36.99<span class=\"per\"> / 年</span>",
+      "pricing.yearly.sub": "最划算 — 按年自动续订",
       "pricing.lifetime.name": "终身版",
+      "pricing.lifetime.price": "AUD 69.99<span class=\"per\"> / 一次</span>",
       "pricing.lifetime.sub": "一次付费，永久使用",
-      "pricing.lifetime.price": "A$69.99",
-      "pricing.trial": "所有订阅含 4 天免费试用，可随时取消。",
-      "contact.title": "联系我们",
+      "pricing.trial": "4 天免费试用 · 随时可取消",
+      "contact.eyebrow": "联系我们",
+      "contact.title": "与我们联系",
       "contact.body": "问题、反馈或支持：<a href=\"mailto:manuelrodriguez8958@gmail.com\">manuelrodriguez8958@gmail.com</a>",
       "footer.copyright": "© CalMaster 版权所有。",
       "footer.links": "<a href=\"/terms\">使用条款</a> · <a href=\"/privacy\">隐私政策</a>"
@@ -297,11 +548,8 @@
       const key = el.getAttribute("data-i18n");
       const val = dict[key];
       if (val == null) return;
-      if (el.hasAttribute("data-i18n-html")) {
-        el.innerHTML = val;
-      } else {
-        el.textContent = val;
-      }
+      if (el.hasAttribute("data-i18n-html")) el.innerHTML = val;
+      else el.textContent = val;
     });
     document.querySelectorAll(".lang-switch button").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.lang === lang);
