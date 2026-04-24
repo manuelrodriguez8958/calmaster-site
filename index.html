@@ -27,9 +27,18 @@
     display: flex; align-items: center; justify-content: space-between;
   }
   .logo { font-size: 17px; font-weight: 700; color: #000; text-decoration: none; letter-spacing: -0.2px; }
+  .nav-right { display: flex; align-items: center; gap: 18px; }
   .nav-links { display: flex; gap: 16px; }
   .nav-links a { font-size: 14px; color: #7C3AED; text-decoration: none; }
   .nav-links a:hover { text-decoration: underline; }
+  .lang-switch { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #888; }
+  .lang-switch button {
+    background: none; border: none; padding: 0;
+    font: inherit; color: #888; cursor: pointer;
+  }
+  .lang-switch button:hover { color: #000; }
+  .lang-switch button.active { color: #000; font-weight: 600; text-decoration: underline; }
+  .lang-switch .sep { color: #ccc; }
   main { max-width: 680px; margin: 0 auto; padding: 40px 20px 48px; }
   .hero { text-align: center; padding: 16px 0 32px; }
   .hero h1 { font-size: 32px; font-weight: 800; color: #000; margin: 0 0 12px; letter-spacing: -0.5px; line-height: 1.2; }
@@ -73,6 +82,7 @@
   .plan-name { font-weight: 600; color: #000; }
   .plan-price { color: #7C3AED; font-weight: 600; }
   .plan-sub { display: block; font-size: 12px; color: #777; font-weight: 400; margin-top: 2px; }
+  .trial-note { font-size: 13px; color: #777; text-align: center; margin-top: 14px; }
   footer {
     max-width: 680px; margin: 0 auto;
     padding: 24px 20px 40px;
@@ -90,84 +100,203 @@
 <nav class="nav">
   <div class="nav-inner">
     <a class="logo" href="/">CalMaster</a>
-    <div class="nav-links">
-      <a href="/terms">Terms</a>
-      <a href="/privacy">Privacy</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/terms" data-i18n="nav.terms">Terms</a>
+        <a href="/privacy" data-i18n="nav.privacy">Privacy</a>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="zh">中文</button>
+        <span class="sep">/</span>
+        <button type="button" data-lang="en">EN</button>
+      </div>
     </div>
   </div>
 </nav>
 
 <main>
   <section class="hero">
-    <h1>Track calories the smart way</h1>
-    <p>CalMaster uses AI to analyze your meal photos and exercise videos. Log faster, understand trends, and hit your goals.</p>
+    <h1 data-i18n="hero.title">Track calories the smart way</h1>
+    <p data-i18n="hero.subtitle">CalMaster uses AI to analyze your meal photos and exercise videos. Log faster, understand trends, and hit your goals.</p>
     <div class="cta-row">
-      <!-- TODO: replace # with the real App Store link once published -->
-      <a class="btn-primary" href="#">Download on the App Store</a>
-      <a class="btn-secondary" href="/privacy">Privacy Policy</a>
+      <a class="btn-primary" href="#" data-i18n="hero.cta">Download on the App Store</a>
+      <a class="btn-secondary" href="/privacy" data-i18n="hero.secondary">Privacy Policy</a>
     </div>
-    <p class="placeholder-note">App Store link coming soon.</p>
+    <p class="placeholder-note" data-i18n="hero.note">App Store link coming soon.</p>
   </section>
 
-  <h2>What you get</h2>
+  <h2 data-i18n="features.title">What you get</h2>
   <div class="features">
     <div class="feature">
-      <strong>AI food photo analysis</strong>
-      <span>Snap your meal and get calorie and macro estimates in seconds.</span>
+      <strong data-i18n="features.f1.title">AI food photo analysis</strong>
+      <span data-i18n="features.f1.desc">Snap your meal and get calorie and macro estimates in seconds.</span>
     </div>
     <div class="feature">
-      <strong>AI exercise video analysis</strong>
-      <span>Record pushups, squats, situps and more — automatic rep counting and calorie burn.</span>
+      <strong data-i18n="features.f2.title">AI exercise video analysis</strong>
+      <span data-i18n="features.f2.desc">Record pushups, squats, situps and more — automatic rep counting and calorie burn.</span>
     </div>
     <div class="feature">
-      <strong>Daily &amp; 30-day trends</strong>
-      <span>Stay on top of your calorie balance with clear weekly and monthly charts.</span>
+      <strong data-i18n="features.f3.title">Daily &amp; 30-day trends</strong>
+      <span data-i18n="features.f3.desc">Stay on top of your calorie balance with clear weekly and monthly charts.</span>
     </div>
     <div class="feature">
-      <strong>Apple HealthKit integration</strong>
-      <span>Pulls your steps and active energy so your dashboard stays in sync.</span>
+      <strong data-i18n="features.f4.title">Apple HealthKit integration</strong>
+      <span data-i18n="features.f4.desc">Pulls your steps and active energy so your dashboard stays in sync.</span>
     </div>
     <div class="feature">
-      <strong>Eight languages</strong>
-      <span>English, 简体中文, 繁體中文, 日本語, Español, Français, Deutsch, Русский.</span>
+      <strong data-i18n="features.f5.title">Challenge friends</strong>
+      <span data-i18n="features.f5.desc">Compete with friends on goals and streaks to stay motivated.</span>
+    </div>
+    <div class="feature">
+      <strong data-i18n="features.f6.title">Eight languages</strong>
+      <span data-i18n="features.f6.desc">English, 简体中文, 繁體中文, 日本語, Español, Français, Deutsch, Русский.</span>
     </div>
   </div>
 
-  <h2>Pricing</h2>
+  <h2 data-i18n="pricing.title">Pricing</h2>
   <div class="plans">
     <div class="plan">
       <div>
-        <div class="plan-name">Monthly</div>
-        <span class="plan-sub">4-day free trial, then auto-renews monthly</span>
+        <div class="plan-name" data-i18n="pricing.monthly.name">Monthly</div>
+        <span class="plan-sub" data-i18n="pricing.monthly.sub">Flexible month-to-month</span>
       </div>
-      <div class="plan-price">A$12.99 / month</div>
+      <div class="plan-price" data-i18n="pricing.monthly.price">A$12.99 / month</div>
     </div>
     <div class="plan">
       <div>
-        <div class="plan-name">Yearly</div>
-        <span class="plan-sub">Auto-renews yearly — save 56% vs monthly</span>
+        <div class="plan-name" data-i18n="pricing.yearly.name">Yearly</div>
+        <span class="plan-sub" data-i18n="pricing.yearly.sub">Save 65% vs monthly</span>
       </div>
-      <div class="plan-price">A$44.99 / year</div>
+      <div class="plan-price" data-i18n="pricing.yearly.price">A$44.99 / year</div>
     </div>
     <div class="plan">
       <div>
-        <div class="plan-name">Lifetime</div>
-        <span class="plan-sub">One-time purchase, no recurring charge</span>
+        <div class="plan-name" data-i18n="pricing.lifetime.name">Lifetime</div>
+        <span class="plan-sub" data-i18n="pricing.lifetime.sub">One-time purchase, no recurring charge</span>
       </div>
-      <div class="plan-price">A$69.99</div>
+      <div class="plan-price" data-i18n="pricing.lifetime.price">A$69.99</div>
     </div>
   </div>
+  <p class="trial-note" data-i18n="pricing.trial">All plans include a 4-day free trial. Cancel anytime.</p>
 
-  <h2>Contact</h2>
-  <p>Questions, feedback, or support: <a href="mailto:support@calmaster.app">support@calmaster.app</a></p>
+  <h2 data-i18n="contact.title">Contact</h2>
+  <p data-i18n="contact.body" data-i18n-html>Questions, feedback, or support: <a href="mailto:support@calmaster.app">support@calmaster.app</a></p>
 </main>
 
 <footer>
-  <span class="copyright">© CalMaster. All rights reserved.</span>
-  <span>
+  <span class="copyright" data-i18n="footer.copyright">© CalMaster. All rights reserved.</span>
+  <span data-i18n="footer.links" data-i18n-html>
     <a href="/terms">Terms</a> · <a href="/privacy">Privacy</a>
   </span>
 </footer>
+
+<script>
+  const I18N = {
+    en: {
+      "nav.terms": "Terms",
+      "nav.privacy": "Privacy",
+      "hero.title": "Track calories the smart way",
+      "hero.subtitle": "CalMaster uses AI to analyze your meal photos and exercise videos. Log faster, understand trends, and hit your goals.",
+      "hero.cta": "Download on the App Store",
+      "hero.secondary": "Privacy Policy",
+      "hero.note": "App Store link coming soon.",
+      "features.title": "What you get",
+      "features.f1.title": "AI food photo analysis",
+      "features.f1.desc": "Snap your meal and get calorie and macro estimates in seconds.",
+      "features.f2.title": "AI exercise video analysis",
+      "features.f2.desc": "Record pushups, squats, situps and more — automatic rep counting and calorie burn.",
+      "features.f3.title": "Daily & 30-day trends",
+      "features.f3.desc": "Stay on top of your calorie balance with clear weekly and monthly charts.",
+      "features.f4.title": "Apple HealthKit integration",
+      "features.f4.desc": "Pulls your steps and active energy so your dashboard stays in sync.",
+      "features.f5.title": "Challenge friends",
+      "features.f5.desc": "Compete with friends on goals and streaks to stay motivated.",
+      "features.f6.title": "Eight languages",
+      "features.f6.desc": "English, 简体中文, 繁體中文, 日本語, Español, Français, Deutsch, Русский.",
+      "pricing.title": "Pricing",
+      "pricing.monthly.name": "Monthly",
+      "pricing.monthly.sub": "Flexible month-to-month",
+      "pricing.monthly.price": "A$12.99 / month",
+      "pricing.yearly.name": "Yearly",
+      "pricing.yearly.sub": "Save 65% vs monthly",
+      "pricing.yearly.price": "A$44.99 / year",
+      "pricing.lifetime.name": "Lifetime",
+      "pricing.lifetime.sub": "One-time purchase, no recurring charge",
+      "pricing.lifetime.price": "A$69.99",
+      "pricing.trial": "All plans include a 4-day free trial. Cancel anytime.",
+      "contact.title": "Contact",
+      "contact.body": "Questions, feedback, or support: <a href=\"mailto:support@calmaster.app\">support@calmaster.app</a>",
+      "footer.copyright": "© CalMaster. All rights reserved.",
+      "footer.links": "<a href=\"/terms\">Terms</a> · <a href=\"/privacy\">Privacy</a>"
+    },
+    zh: {
+      "nav.terms": "条款",
+      "nav.privacy": "隐私政策",
+      "hero.title": "智能卡路里追踪，轻松达成目标",
+      "hero.subtitle": "CalMaster 用 AI 帮你记录每一餐、分析每一次运动，让健康管理前所未有的简单。",
+      "hero.cta": "App Store 下载",
+      "hero.secondary": "隐私政策",
+      "hero.note": "即将上线，敬请期待。",
+      "features.title": "核心功能",
+      "features.f1.title": "AI 食物照片分析",
+      "features.f1.desc": "拍一张照片，自动识别卡路里和营养素，无需手动查询。",
+      "features.f2.title": "AI 运动视频分析",
+      "features.f2.desc": "录制运动视频，AI 自动计算消耗卡路里，告别估算烦恼。",
+      "features.f3.title": "每日 & 30 天趋势",
+      "features.f3.desc": "清晰图表呈现饮食规律，掌握每日的摄入与趋势变化。",
+      "features.f4.title": "Apple 健康集成",
+      "features.f4.desc": "自动同步步数与主动消耗，数据全方位打通。",
+      "features.f5.title": "挑战好友",
+      "features.f5.desc": "和朋友比拼目标达成，互相激励，坚持更久。",
+      "features.f6.title": "支持 8 种语言",
+      "features.f6.desc": "全球化体验，选择你最熟悉的语言使用。",
+      "pricing.title": "订阅方案",
+      "pricing.monthly.name": "月订阅",
+      "pricing.monthly.sub": "按月灵活订阅",
+      "pricing.monthly.price": "A$12.99 / 月",
+      "pricing.yearly.name": "年订阅",
+      "pricing.yearly.sub": "相比月订阅省 65%",
+      "pricing.yearly.price": "A$44.99 / 年",
+      "pricing.lifetime.name": "终身版",
+      "pricing.lifetime.sub": "一次付费，永久使用",
+      "pricing.lifetime.price": "A$69.99",
+      "pricing.trial": "所有订阅含 4 天免费试用，可随时取消。",
+      "contact.title": "联系我们",
+      "contact.body": "问题、反馈或支持：<a href=\"mailto:support@calmaster.app\">support@calmaster.app</a>",
+      "footer.copyright": "© CalMaster 版权所有。",
+      "footer.links": "<a href=\"/terms\">使用条款</a> · <a href=\"/privacy\">隐私政策</a>"
+    }
+  };
+
+  function applyLang(lang) {
+    if (!I18N[lang]) lang = "en";
+    const dict = I18N[lang];
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      const val = dict[key];
+      if (val == null) return;
+      if (el.hasAttribute("data-i18n-html")) {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
+      }
+    });
+    document.querySelectorAll(".lang-switch button").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+    try { localStorage.setItem("calmaster.lang", lang); } catch (e) {}
+  }
+
+  (function init() {
+    let saved = "en";
+    try { saved = localStorage.getItem("calmaster.lang") || "en"; } catch (e) {}
+    applyLang(saved);
+    document.querySelectorAll(".lang-switch button").forEach(btn => {
+      btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+    });
+  })();
+</script>
 
 </body>
 </html>
