@@ -58,29 +58,30 @@
     border: 1px solid #d5d5d5;
   }
   .btn-secondary:hover { background: #f5f5f5; }
+  .screenshots-bg {
+    background: #f5f5f5;
+    padding: 40px 0;
+    margin: 32px calc(50% - 50vw) 8px;
+  }
   .screenshots {
-    margin-top: 32px;
-    display: flex; gap: 16px;
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex; gap: 20px;
     overflow-x: auto;
-    padding: 4px 2px 12px;
+    padding: 4px 20px 12px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
   }
   .screenshots::-webkit-scrollbar { height: 6px; }
-  .screenshots::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 3px; }
+  .screenshots::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 3px; }
   .shot {
     flex: 0 0 auto;
     width: 200px;
-    aspect-ratio: 375 / 812;
-    background: #ececec;
-    border: 1px solid #e0e0e0;
+    height: auto;
     border-radius: 24px;
-    display: flex; align-items: center; justify-content: center;
-    color: #999; font-size: 13px; font-weight: 500;
+    object-fit: contain;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     scroll-snap-align: start;
-  }
-  @media (min-width: 640px) {
-    .screenshots { justify-content: center; overflow-x: visible; }
   }
   h2 { font-size: 20px; font-weight: 700; color: #000; margin: 40px 0 12px; letter-spacing: -0.2px; }
   .features { display: grid; gap: 14px; margin-top: 8px; }
@@ -145,11 +146,14 @@
     </div>
   </section>
 
-  <div class="screenshots" aria-label="App screenshots">
-    <div class="shot">Screenshot</div>
-    <div class="shot">Screenshot</div>
-    <div class="shot">Screenshot</div>
-    <div class="shot">Screenshot</div>
+  <div class="screenshots-bg">
+    <div class="screenshots" aria-label="App screenshots">
+      <img class="shot" src="screenshots/ss1.png" alt="CalMaster screenshot 1">
+      <img class="shot" src="screenshots/ss2.png" alt="CalMaster screenshot 2">
+      <img class="shot" src="screenshots/ss3.png" alt="CalMaster screenshot 3">
+      <img class="shot" src="screenshots/ss4.png" alt="CalMaster screenshot 4">
+      <img class="shot" src="screenshots/ss5.png" alt="CalMaster screenshot 5">
+    </div>
   </div>
 
   <h2 data-i18n="features.title">What you get</h2>
